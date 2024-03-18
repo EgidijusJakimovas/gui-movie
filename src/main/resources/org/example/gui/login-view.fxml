@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="281.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gui.controller.LoginController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <Pane prefHeight="281.0" prefWidth="361.0">
+            <children>
+                <Label alignment="CENTER" layoutX="-10.0" prefHeight="67.0" prefWidth="350.0" text="Filmai.in">
+                    <font>
+                        <Font name="Gadugi Bold" size="18.0"/>
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="44.0" layoutY="83.0" prefHeight="20.0" prefWidth="105.0"
+                       text="Username">
+                    <font>
+                        <Font name="Gadugi" size="14.0"/>
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="44.0" layoutY="142.0" prefHeight="20.0" prefWidth="105.0"
+                       text="Password">
+                    <font>
+                        <Font name="Gadugi" size="14.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="username" layoutX="148.0" layoutY="81.0" prefHeight="25.0" prefWidth="149.0">
+                    <tooltip>
+                        <Tooltip/>
+                    </tooltip>
+                </TextField>
+                <PasswordField fx:id="password" layoutX="148.0" layoutY="140.0" prefHeight="25.0" prefWidth="149.0">
+                    <tooltip>
+                        <Tooltip/>
+                    </tooltip>
+                </PasswordField>
+                <Button fx:id="login" layoutX="84.0" layoutY="230.0" mnemonicParsing="false"
+                        onAction="#onLoginButtonClick" prefHeight="25.0" prefWidth="64.0" text="Sign in"/>
+                <Button fx:id="signup" layoutX="179.0" layoutY="230.0" mnemonicParsing="false"
+                        onAction="#onSignUpButtonClick" text="Sign up"/>
+                <Label fx:id="loginStatus" alignment="CENTER" layoutX="20.0" layoutY="175.0" prefHeight="50.0"
+                       prefWidth="310.0" textAlignment="CENTER" textFill="#e40606" wrapText="true">
+                    <font>
+                        <Font name="Gadugi" size="14.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+    </children>
+</GridPane>
