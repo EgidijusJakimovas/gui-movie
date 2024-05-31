@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> </title>
-</head>
 <body>
     <h1>Movie Database Application</h1>
     <p>This JavaFX application allows users to manage a movie database by performing CRUD (Create, Read, Update, Delete) operations. The application consists of a user authentication system with roles (admin/user) and multiple functionalities for managing movies.</p>
