@@ -1,11 +1,5 @@
 package org.example.gui.controller;
 
-import org.example.gui.MainApplication;
-import org.example.gui.model.Movie;
-import org.example.gui.model.MovieDAO;
-import org.example.gui.model.UserDAO;
-import org.example.gui.model.UserSingleton;
-import org.example.gui.utils.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,9 +11,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.example.gui.MainApplication;
+import org.example.gui.model.Movie;
+import org.example.gui.model.MovieDAO;
+import org.example.gui.model.UserDAO;
+import org.example.gui.model.UserSingleton;
+import org.example.gui.utils.Validation;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DashboardController {
     @FXML
@@ -146,9 +147,9 @@ public class DashboardController {
             year = releaseDate.getSelectionModel().getSelectedItem().toString();
         }
 
-        if (!Validation.isValidMovieName(nameOfMovie)) {
+        if (Validation.isValidMovieName(nameOfMovie)) {
             status.setText("Enter a movie name");
-        } else if (!Validation.isValidMovieDuration(durationOfMovie)) {
+        } else if (Validation.isValidMovieDuration(durationOfMovie)) {
             status.setText("Enter movie duration");
         } else if (actors.isEmpty()) {
             status.setText("Pick an actor or actors");
@@ -201,11 +202,11 @@ public class DashboardController {
                 year = releaseDate.getSelectionModel().getSelectedItem().toString();
             }
 
-            if (!Validation.isValidMovieID(idOfMovie)) {
+            if (Validation.isValidMovieID(idOfMovie)) {
                 status.setText("Enter movie database ID");
-            } else if (!Validation.isValidMovieName(nameOfMovie)) {
+            } else if (Validation.isValidMovieName(nameOfMovie)) {
                 status.setText("Enter a movie name");
-            } else if (!Validation.isValidMovieDuration(durationOfMovie)) {
+            } else if (Validation.isValidMovieDuration(durationOfMovie)) {
                 status.setText("Enter movie duration");
             } else if (actors.isEmpty()) {
                 status.setText("Pick an actor or actors");
@@ -229,12 +230,20 @@ public class DashboardController {
     @FXML
     public void onDeleteButtonClick() {
         String idOfMovie = movieID.getText();
+        if (idOfMovie.isEmpty()) {
+            status.setText("Enter movie database ID");
+            return;
+        }
         ArrayList<Integer> idList = MovieDAO.getMovieIdNumbers();
         if (roleStatus.getText().equals("admin")) {
-            int idMovie = Integer.parseInt(idOfMovie);
-            if (!Validation.isValidMovieID(idOfMovie)) {
-                status.setText("Enter movie database ID");
-            } else if (!idList.contains(idMovie)) {
+            int idMovie;
+            try {
+                idMovie = Integer.parseInt(idOfMovie);
+            } catch (NumberFormatException e) {
+                status.setText("Invalid movie database ID");
+                return;
+            }
+            if (!idList.contains(idMovie)) {
                 status.setText("Error: Movie ID out of bound.");
             } else {
                 MovieDAO.delete(idMovie);
@@ -247,7 +256,7 @@ public class DashboardController {
 
     @FXML
     public void onSignOutButtonClick(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(MainApplication.class.getResource("Login-view.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("Login-view.fxml")));
         Stage signupStage = new Stage();
         signupStage.setTitle("Sign in");
         signupStage.setScene(new Scene(root, 350, 281));

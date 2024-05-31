@@ -3,11 +3,11 @@ package org.example.gui.model;
 import java.sql.*;
 
 public class UserDAO {
-    private static final String URL = "jdbc:mysql://localhost:3306/movies";
+    private static final String URL = "jdbc:mysql://localhost:3306/movie";
     private static String query;
 
     public static void create(User user) {
-        query = "INSERT INTO users_data (username, password, email, admin)\n" +
+        query = "INSERT INTO users (username, password, email, admin)\n" +
                 "VALUES (?, ?, ?, ?);";
         try {
             Connection connection = DriverManager.getConnection(URL, "root", "");
@@ -25,7 +25,7 @@ public class UserDAO {
     }
 
     public static String getBCryptPassword(String username) {
-        query = "SELECT password FROM users_data WHERE username = ?;";
+        query = "SELECT password FROM users WHERE username = ?;";
 
         String passwordBCrypt = "";
         try {
@@ -48,7 +48,7 @@ public class UserDAO {
     }
 
     public static String searchByUsername(String username) {
-        query = "SELECT * FROM users_data WHERE username = ?";
+        query = "SELECT * FROM users WHERE username = ?";
 
         String role = "";
         try {
@@ -68,7 +68,7 @@ public class UserDAO {
     }
 
     public static int searchByUsernameReturnID(String username) {
-        query = "SELECT id FROM users_data WHERE username = ?";
+        query = "SELECT id FROM users WHERE username = ?";
 
         int userID = 0;
         try {

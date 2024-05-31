@@ -2,6 +2,7 @@ module org.example.gui {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires static lombok;
 
 
     opens org.example.gui to javafx.fxml;

@@ -4,15 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class MovieDAO {
-    private static final String URL = "jdbc:mysql://localhost:3306/movies";
+    private static final String URL = "jdbc:mysql://localhost:3306/movie";
     private static String query;
 
     public static ArrayList<Movie> searchByName(String movieName, String role) {
         if (role.equals("admin")) {
-            query = "SELECT * FROM movies_data WHERE movieName LIKE ?";
+            query = "SELECT * FROM movies WHERE name LIKE ?";
         } else {
             int userID = UserDAO.searchByUsernameReturnID(UserSingleton.getInstance().getUsername());
-            query = "SELECT * FROM movies_data WHERE movieName LIKE ? AND userID = " + userID;
+            query = "SELECT * FROM movies WHERE name LIKE ? AND user_id = " + userID;
         }
         ArrayList<Movie> list = new ArrayList<>();
         try {
@@ -22,13 +22,13 @@ public class MovieDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(new Movie(
-                        resultSet.getInt("movieID"),
-                        resultSet.getString("movieName"),
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
                         resultSet.getInt("duration"),
                         resultSet.getString("actors"),
                         resultSet.getString("directors"),
-                        resultSet.getInt("releaseYear"),
-                        resultSet.getInt("userID")
+                        resultSet.getInt("release_year"),
+                        resultSet.getInt("user_id")
                 ));
             }
             preparedStatement.close();
@@ -40,7 +40,7 @@ public class MovieDAO {
     }
 
     public static void create(Movie movie) {
-        query = "INSERT INTO movies_data (movieName, duration, actors, directors, releaseYear, userID)\n" +
+        query = "INSERT INTO movies (name, duration, actors, directors, release_year, user_id)\n" +
                 "VALUES (?, ?, ?, ?, ?, ?);";
         try {
             Connection connection = DriverManager.getConnection(URL, "root", "");
@@ -59,8 +59,8 @@ public class MovieDAO {
     }
 
     public static void update(Movie movie) {
-        query = "UPDATE movies_data SET movieName = ?, duration = ?, actors = ?, directors = ?, releaseYear = ?\n" +
-                "WHERE movieID = ?;";
+        query = "UPDATE movies SET name = ?, duration = ?, actors = ?, directors = ?, release_year = ?\n" +
+                "WHERE id = ?;";
         try {
             Connection connection = DriverManager.getConnection(URL, "root", "");
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -78,7 +78,7 @@ public class MovieDAO {
     }
 
     public static void delete(int movieID) {
-        query = "DELETE FROM movies_data WHERE movieID = ?;";
+        query = "DELETE FROM movies WHERE id = ?;";
         try {
             Connection connection = DriverManager.getConnection(URL, "root", "");
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -93,14 +93,14 @@ public class MovieDAO {
     }
 
     public static ArrayList<Integer> getMovieIdNumbers() {
-        query = "SELECT movieID FROM movies_data;";
+        query = "SELECT id FROM movies;";
         ArrayList<Integer> list = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(URL, "root", "");
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(resultSet.getInt("movieID"));
+                list.add(resultSet.getInt("id"));
             }
             preparedStatement.close();
             connection.close();

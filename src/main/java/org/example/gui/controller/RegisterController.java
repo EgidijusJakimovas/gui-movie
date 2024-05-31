@@ -1,10 +1,5 @@
 package org.example.gui.controller;
 
-import org.example.gui.MainApplication;
-import org.example.gui.model.User;
-import org.example.gui.model.UserDAO;
-import org.example.gui.utils.BCryptPassword;
-import org.example.gui.utils.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.gui.MainApplication;
+import org.example.gui.model.User;
+import org.example.gui.model.UserDAO;
+import org.example.gui.utils.BCryptPassword;
+import org.example.gui.utils.Validation;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class RegisterController {
     @FXML
@@ -83,7 +84,7 @@ public class RegisterController {
 
     @FXML
     public void goToSignInWindow(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(MainApplication.class.getResource("Login-view.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("Login-view.fxml")));
         Stage signupStage = new Stage();
         signupStage.setTitle("Sign in");
         signupStage.setScene(new Scene(root, 350, 281));

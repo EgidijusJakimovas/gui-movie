@@ -16,7 +16,7 @@
     <children>
         <Pane prefHeight="281.0" prefWidth="361.0">
             <children>
-                <Label alignment="CENTER" layoutX="-10.0" prefHeight="67.0" prefWidth="350.0" text="Filmai.in">
+                <Label alignment="CENTER" layoutX="-10.0" prefHeight="67.0" prefWidth="350.0" text="Film.in">
                     <font>
                         <Font name="Gadugi Bold" size="18.0"/>
                     </font>

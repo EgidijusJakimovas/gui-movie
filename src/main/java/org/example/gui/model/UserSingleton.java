@@ -1,24 +1,22 @@
 package org.example.gui.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserSingleton {
     private static UserSingleton instance;
     private String username;
-
-    private UserSingleton() {
-    }
 
     public static UserSingleton getInstance() {
         if (instance == null) {
             instance = new UserSingleton();
         }
         return instance;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 }

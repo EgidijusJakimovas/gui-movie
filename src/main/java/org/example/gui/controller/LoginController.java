@@ -1,20 +1,24 @@
 package org.example.gui.controller;
 
-import org.example.gui.MainApplication;
-import org.example.gui.model.UserDAO;
-import org.example.gui.model.UserSingleton;
-import org.example.gui.utils.BCryptPassword;
-import org.example.gui.utils.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
+import org.example.gui.MainApplication;
+import org.example.gui.model.UserDAO;
+import org.example.gui.model.UserSingleton;
+import org.example.gui.utils.BCryptPassword;
+import org.example.gui.utils.Validation;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoginController {
     @FXML
@@ -65,7 +69,7 @@ public class LoginController {
 
     @FXML
     public void onSignUpButtonClick(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(MainApplication.class.getResource("register-view.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("register-view.fxml")));
         Stage signupStage = new Stage();
         signupStage.setTitle("Sign up");
         signupStage.setScene(new Scene(root, 400, 415));
@@ -75,7 +79,7 @@ public class LoginController {
 
     @FXML
     public void goToDashboard(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(MainApplication.class.getResource("dashboard-view.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(MainApplication.class.getResource("dashboard-view.fxml")));
         Stage signupStage = new Stage();
         signupStage.setTitle("Dashboard");
         signupStage.setScene(new Scene(root, 850, 650));

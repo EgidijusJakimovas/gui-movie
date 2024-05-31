@@ -20,19 +20,19 @@ public class Validation {
     public static boolean isValidMovieName(String movieName) {
         Pattern pattern = Pattern.compile(MOVIE_NAME_REGEX_PATTERN);
         Matcher matcher = pattern.matcher(movieName);
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     public static boolean isValidMovieDuration(String movieDuration) {
         Pattern pattern = Pattern.compile(MOVIE_DURATION_REGEX_PATTERN);
         Matcher matcher = pattern.matcher(movieDuration);
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     public static boolean isValidMovieID(String movieID) {
         Pattern pattern = Pattern.compile(MOVIE_ID_REGEX_PATTERN);
         Matcher matcher = pattern.matcher(movieID);
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     public static boolean isValidPassword(String password) {
